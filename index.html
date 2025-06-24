@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Quem te Stalkeia?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+    button {
+      background: #ff007f;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e60073;
+    }
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8em;
+      color: rgba(255,255,255,0.4);
+    }
+  </style>
+</head>
+<body>
+  <h1>Descubra quem te stalkeia no Insta!</h1>
+  <p>Coloque seu @ para ver quem anda te espionando 👀</p>
+  <input type="text" placeholder="@seuusuario" id="username">
+  <button onclick="verStalker()">Ver Stalker</button>
+
+  <audio id="audio" src="troll.mp4" preload="auto"></audio>
+
+  <div class="footer">Este site não se conecta ao Instagram. É só uma brincadeira 😉</div>
+
+  <script>
+    function verStalker() {
+      const audio = document.getElementById("audio");
+      audio.play();
+
+      // Vibração: vibra por 200ms, pausa 100ms, vibra mais 200ms
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+      }
+
+      alert("😜 Pegadinha do malandro!\n\nNinguém consegue ver stalker no Instagram, vai viver sua vida 😆");
+    }
+  </script>
+</body>
+</html>
