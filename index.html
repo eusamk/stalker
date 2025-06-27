@@ -2,81 +2,149 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Quem te Stalkeia?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surpresinha 💌</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #1f1c2c, #928dab);
-      color: white;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #ffe6f0;
+      color: #333;
+      overflow: hidden;
+      height: 100vh;
       display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 150px;
+      background: url('https://i.imgur.com/fENqUxt.png') no-repeat center/cover;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .fire {
+      animation: burn 2s forwards;
+    }
+
+    @keyframes burn {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; filter: brightness(1); }
+      100% { transform: scale(0.5) rotate(720deg); opacity: 0; filter: brightness(0); }
+    }
+
+    .card {
+      display: none;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
       text-align: center;
-      padding: 20px;
+      max-width: 80%;
+      background: #fff0f5;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+      animation: fadeIn 2s ease forwards;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    input {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      width: 80%;
-      max-width: 300px;
-      margin-bottom: 20px;
-      font-size: 1em;
-    }
-    button {
-      background: #ff007f;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.1em;
+
+    .arrow {
+      margin-top: 20px;
+      font-size: 40px;
+      animation: bounce 1s infinite;
       cursor: pointer;
-      transition: background 0.3s;
     }
-    button:hover {
-      background: #e60073;
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.8em;
-      color: rgba(255,255,255,0.4);
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cinema-mode {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .cinema-mode h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #ff69b4;
+    }
+
+    video {
+      max-width: 90%;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+    }
+
+    body.flowery {
+      background-image: url('https://i.imgur.com/1ZQ9ZTr.jpg');
+      background-size: cover;
+      background-position: center;
     }
   </style>
 </head>
-<body>
-  <h1>Descubra quem te stalkeia no Insta!</h1>
-  <p>Coloque seu @ para ver quem anda te espionando 👀</p>
-  <input type="text" placeholder="@seuusuario" id="username">
-  <button onclick="verStalker()">Ver Stalker</button>
+<body class="flowery">
+  <div id="envelope" class="envelope"></div>
 
-  <audio id="audio" src="Troll.mp3" preload="auto"></audio>
+  <div id="card" class="card">
+    <p>Oi meu amor! 💖<br><br>
+    Só queria te lembrar o quanto você é especial pra mim...<br>
+    Você é a flor mais linda do meu jardim! 🌸<br><br>
+    Agora vem cá que preparei uma surpresinha... 🎬🍿</p>
+    <div class="arrow" onclick="startCinema()">⬇️</div>
+  </div>
 
-  <div class="footer">Este site não se conecta ao Instagram. É só uma brincadeira 😉</div>
+  <div id="cinema" class="cinema-mode" style="display: none;">
+    <h1>HORA DO CINEMINHA 🎥</h1>
+    <video id="movie" controls>
+      <source src="SEU-LINK-DE-FILME.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+  </div>
 
   <script>
-    function verStalker() {
-      const audio = document.getElementById("audio");
-      audio.play();
+    const envelope = document.getElementById('envelope');
+    const card = document.getElementById('card');
+    const cinema = document.getElementById('cinema');
 
-      // Vibração: vibra por 200ms, pausa 100ms, vibra mais 200ms
-      if (navigator.vibrate) {
-        navigator.vibrate([200, 100, 200]);
-      }
+    envelope.addEventListener('click', () => {
+      envelope.classList.add('fire');
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        card.style.display = 'flex';
+      }, 2000);
+    });
 
-      alert("😜 Pegadinha do malandro!\n\nNinguém consegue ver stalker no Instagram, vai viver sua vida 😆");
+    function startCinema() {
+      document.body.classList.remove('flowery');
+      document.body.style.background = '#000';
+      card.style.display = 'none';
+      cinema.style.display = 'flex';
     }
   </script>
 </body>
